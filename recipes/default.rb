@@ -1,5 +1,5 @@
-src = node[:cloud_watch_logs][:source]
-dest = node[:cloud_watch_logs][:install_dir]
+src = node[:cloudwatch_logs][:source]
+dest = node[:cloudwatch_logs][:install_dir]
 install_file = File.join(dest, File.basename(src))
 
 cfg = File.join(Chef::Config[:file_cache_path], 'cwlogs.cfg')
@@ -15,6 +15,6 @@ remote_file install_file do
 end
 
 execute "Install CloudWatch Logs agent" do
-  command "#{install_file} -n -r #{node[:cloud_watch_logs][:region]} -c #{cfg}"
+  command "#{install_file} -n -r #{node[:cloudwatch_logs][:region]} -c #{cfg}"
   not_if { system "pgrep -f aws-logs-agent-setup" }
 end
