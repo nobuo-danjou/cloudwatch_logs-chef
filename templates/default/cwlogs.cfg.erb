@@ -1,0 +1,10 @@
+[general]
+state_file = <%= node[:cloud_watch_logs][:state_file] %>
+
+<% node[:cloud_watch_logs][:logs].each do |st| %>
+[<%= st %>]
+datetime_format = [%Y-%m-%d %H:%M:%S]
+log_group_name = <%= st %>
+file = <%= st %>
+log_stream_name = {instance_id}
+<% end %>
